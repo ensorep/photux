@@ -27,12 +27,12 @@ export default function Home() {
   const dataSample = (data ? data.slice(0, numOfItems) : []);
 
   const leftTiles = () => {
-    const oddArr = dataSample.filter(i => (i.id % 2))
+    const oddArr = dataSample.filter((i:any) => (i.id % 2))
     return tileGenerator(oddArr)
   }
 
   const rightTiles = () => {
-    const evenArr = dataSample.filter(i => !(i.id % 2))
+    const evenArr = dataSample.filter((i:any) => !(i.id % 2))
     return tileGenerator(evenArr)
   }
 
@@ -61,7 +61,7 @@ export default function Home() {
           <div className={styles.tileWrapperB}>
             {rightTiles()}
           </div>
-          
+
        </div>
       </main>
     </>
