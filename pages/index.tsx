@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import Profile from '@/components/profile'
+import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,9 +19,9 @@ export default function Home() {
       <main className={styles.main}>
         <div>
           {Profile() ? Profile() : ''}
-           <a href="/api/auth/login">Login</a>
+           <Link href="/api/auth/login">Login</Link>
            <br/>
-           <a href="/api/auth/logout">Logout</a>
+           <Link href="/api/auth/logout">Logout</Link>
         </div>
       </main>
     </>
