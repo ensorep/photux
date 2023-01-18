@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-export default () => (
+export const Header = () => (
   <div>
     <p>Photux</p>
     <Link href="/api/auth/login">Login</Link>
@@ -9,3 +9,5 @@ export default () => (
     <Link href="/api/auth/logout">Logout</Link>
   </div> 
 )
+
+export default Header
