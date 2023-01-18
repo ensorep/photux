@@ -1,10 +1,11 @@
 import React from "react";
+import styles from '../styles/Tile.module.scss'
 import { motion } from "framer-motion";
 
 export const Tile = (props:any) => {
   return (
-    <div>
-        <p>{props.title}</p>
+    <div className={styles.tile}>
+      <p className={styles.title}>{props.title}</p>
     </div>
   )
 }
