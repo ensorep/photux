@@ -1,0 +1,46 @@
+  
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 1fr;
+    gap: 0.5rem;
+    max-width: 100%;
+    grid-auto-flow: dense;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .tile {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background-color: #efefef;
+    color: #121212;
+    font-weight: bolder;
+    font-family: sans-serif;
+    text-transform: capitalize;
+    font-size: 1.5rem;
+    word-wrap: break-word;
+  }
+  
+  .title {
+    text-align: left;
+    display: inline;
+  }
+  
+  .tile {
+    max-height: 200px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    align-self: start;
+    width: 40%;
+  }
+  
+  
+  .Home_main__nLjiQ {
+    padding: 1rem;
+  }
+  

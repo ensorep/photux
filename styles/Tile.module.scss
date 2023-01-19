@@ -1,5 +1,6 @@
 .tile {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 1.5rem;
@@ -11,11 +12,12 @@
     font-size: 1.5rem;
     align-self: start;
     overflow: hidden;
-    max-height: 270px;
+    max-height: 400px;
     overflow-wrap: break-word;
     word-break: break-word;
     word-wrap: break-word;
     border-radius: 5px;
+    border: 0;
   }
   
   .title {
@@ -23,3 +25,9 @@
     display: inline;
   }
   
+  .thumbnail {
+    width: clamp(90%, 150px, 90%);
+    height: clamp(90%, 150px, 90%);
+    display: none;
+    border-radius: 5px;
+  }
