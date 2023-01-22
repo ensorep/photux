@@ -1,0 +1,34 @@
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-block-start: 1rem;  
+    padding: 0.5rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+.title {
+    // letter-spacing: 5px;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    text-transform: capitalize;
+    margin: 2rem;
+    font-size: 2rem;
+    text-align: center;
+  }
+
+.main {
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+padding: 1.5rem;
+min-height: 100vh;
+}
+
+
+.photoTileLink {
+    width: 275px;
+    min-width: 275px;
+    max-width: 400px;
+}

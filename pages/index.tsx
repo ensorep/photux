@@ -8,10 +8,13 @@ import Link from 'next/link'
 import useSWR from 'swr'
 import Tile from '@/components/tile'
 import Header from '@/components/header'
+import Footer from '@/components/footer'
+
 
 const inter = Inter({ subsets: ['latin'] })
 let numOfAlbums = 12;
-let numOfPhotos = 15;
+
+export let albumSample: [];
 
 export const fetchFn = async (args:any) => {
   try {
@@ -25,69 +28,47 @@ export const fetchFn = async (args:any) => {
 }
 
 export default function Home() {
-  const [tileState, setTileState] = useState('albums')
   const { data, error, isLoading } = useSWR('https://jsonplaceholder.typicode.com/albums', fetchFn)
-  const albumSample = (data ? data.slice(0, numOfAlbums) : []);
+  albumSample = (data ? data.slice(0, numOfAlbums) : []);
 
   const handleModal = () => {}
 
   const tileClick = async (e:any) => {
-    if(tileState === 'albums'){
       const $tile = e.currentTarget
       const $title = document.querySelector('[data-is-title]')
       const albumId = $tile.dataset.albumId
-      
+
       const res = await fetch(`https://jsonplaceholder.typicode.com/albums/${albumId}/photos`)
       const data = await res.json()
-      const photoSample = (data.slice(0, numOfPhotos))
-    
-      $title.textContent = $tile.textContent
-
-      convertTile(photoSample)
-      setTileState('photos')
-    } else {
-      handleModal()
-    }
-    
-  }
-
-  const convertTile = (photoArr:[]) => {
-    const $tiles = [...document.querySelectorAll('[data-album-id]')]
-    console.log($tiles[0])
-    return photoArr.map((photo:any,i) => {
-      if($tiles[i]){
-        $tiles[i].lastChild.textContent = photo.title
-        $tiles[i].lastChild.classList.add('photo-title')
-        $tiles[i].firstChild.style.display = 'block'
-        $tiles[i].firstChild.src = photo.thumbnailUrl
-
-
-      }
-    })
   }
 
   const leftTiles = () => {
     const oddArr = albumSample.filter((i:any) => (i.id % 2))
-    return tileGenerator(oddArr)
+    return generateAlbumTiles(oddArr)
   }
 
   const rightTiles = () => {
     const evenArr = albumSample.filter((i:any) => !(i.id % 2))
-    return tileGenerator(evenArr)
+    return generateAlbumTiles(evenArr)
   }
 
-  const tileGenerator = (arr: { id: number; title: string }[]) => {
+  const generateAlbumTiles = (arr: { id: number; title: string }[]) => {
       return arr.map((item: { id: number; title: string}) => (
-      <Tile 
-        tileClick={tileClick} 
-        key={item.id} 
-        id={item.id} 
-        title={item.title}
-      />)
+        <Link 
+          key={item.id}
+          href={`album/${item.id}-${item.title.replaceAll(' ','-')}`}
+        >
+          <Tile 
+          tileClick={tileClick} 
+          key={item.id} 
+          id={item.id} 
+          title={item.title}
+          />
+        </Link>
       )
-    }
+    )
+  }
   
-
   return (
     <>
       <Head>
@@ -110,6 +91,7 @@ export default function Home() {
             {rightTiles()}
           </div>
        </div>
+       <Footer/>
       </main>
     </>
   )

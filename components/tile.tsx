@@ -11,7 +11,7 @@ export const Tile = (props:any) => {
     data-album-id={props.id}
     // whileHover={{scale:1.05}}
     // whileTap={{scale:0.9}}
-    className={styles.tile}
+    className={props.isPhotoTile? styles.photoTile : styles.tile}
     onClick= {(e) => {
       setSelected(!selected)
       props.tileClick(e)
@@ -30,8 +30,12 @@ export const Tile = (props:any) => {
       y: "100vh"
     }}
   >
-    <img data-is-img className={styles.thumbnail}/>
-    <p className={styles.title}>{props.title}</p>
+    {props.isPhotoTile && (
+      // Modal shit
+      <img src={props.thumbnail} className={styles.thumbnail}/>
+    )}
+    {/* {props.isPhotoTile} */}
+    <p className={props.isPhotoTile ? styles.photoTitle : styles.title}>{props.title}</p>
   </motion.div>
   )
 }
