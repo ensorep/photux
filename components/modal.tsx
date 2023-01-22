@@ -2,6 +2,10 @@
 // import styles from "../styles/Modal.module.scss"
 // import Overlay from "./overlay";
 
+export const Modal = () => {}
+
+export default Modal
+
 // const Modal = ({ children, onClick }) => {
 
 
