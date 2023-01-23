@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import styles from '../styles/Tile.module.scss'
 import { motion } from "framer-motion"
 
 export const Tile = (props:any) => {
-  const [selected, setSelected] = useState(false)
+  // const [selected, setSelected] = useState(false)
+  const [transform, setTransform] = useState(false)
   
   return (
     <motion.div
@@ -13,17 +14,25 @@ export const Tile = (props:any) => {
     // whileTap={{scale:0.9}}
     className={props.isPhotoTile? styles.photoTile : styles.tile}
     onClick= {(e) => {
-      setSelected(!selected)
-      props.tileClick(e)
+      if(props.isPhotoTile){
+        const $currentTile = e.currentTarget;
+        const $photoTitle = $currentTile.querySelector('[data-photo-title]');
+    
+        $currentTile.querySelector('p')?.classList.toggle('hide');
+        $currentTile.classList.toggle('modal');
+        // $photoTitle?.classList.toggle('hide');
+        setTransform(!transform)
+      }
+      // props.tileClick(e)
     }}
     animate={{
-      // rotateX: selected ? 360: 0,
       rotate: 360,
-      scale: 1,
+      rotateX: transform ? 360 : 0,
+      scale: transform ? 1.25 : 1,
       y: 0
     }}
     transition = {{
-      duration: 0.7 
+      duration: 0.65 
     }}
     initial = {{
       scale: 0,
@@ -32,10 +41,11 @@ export const Tile = (props:any) => {
   >
     {props.isPhotoTile && (
       // Modal shit
-      <img src={props.thumbnail} className={styles.thumbnail}/>
+      <img src={transform ? props.url : props.thumbnail} className={styles.thumbnail}/>
     )}
-    {/* {props.isPhotoTile} */}
-    <p className={props.isPhotoTile ? styles.photoTitle : styles.title}>{props.title}</p>
+    <div className={styles.tile_bottom}>
+    <p data-photo-title className={props.isPhotoTile ? styles.photoTitle : styles.title}>{props.title}</p>
+    </div>
   </motion.div>
   )
 }

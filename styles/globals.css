@@ -111,3 +111,17 @@ a {
   font-size: 1rem;
   margin: 1rem 0;
 }
+
+.hide {
+  /* display: none !important; */
+  opacity: 0;
+  transition: 0.65s;
+  margin: 0 !important;
+}
+
+.modal {
+  height: inherit !important;
+  /* position: absolute; */
+  z-index: 5;
+  
+}

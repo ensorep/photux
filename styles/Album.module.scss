@@ -9,12 +9,15 @@
   }
 
 .title {
-    // letter-spacing: 5px;
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
     text-transform: capitalize;
-    margin: 2rem;
-    font-size: 2rem;
+    margin: 2rem 1rem;
+    font-size: 1rem;
     text-align: center;
+    word-break: break-all;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    font-weight: bold;
   }
 
 .main {
@@ -31,4 +34,23 @@ min-height: 100vh;
     width: 275px;
     min-width: 275px;
     max-width: 400px;
+}
+
+.back {
+    color: #7D7D7D;
+    font-size: 1rem;
+    min-width: 75px;
+    font-weight: bold;
+    // word-break:break-all;
+    // overflow-wrap: break-word;
+    padding-inline-end: 0.75rem;
+    border-inline-end: 3px solid #7D7D7D;
+}
+
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    .albumTitle {
+        padding-inline-start: 0.75rem;
+    }
 }

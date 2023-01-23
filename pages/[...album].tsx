@@ -28,10 +28,10 @@ export const Album = (props:any) => {
   const generatePhotoTiles = () => {
     console.log(photoSample)
     return photoSample.map((photo: { id: number; title: string, thumbnailUrl: string, url: string}) => (
-      <Link 
+      <div
         className={styles.photoTileLink}
         key={photo.id}
-        href={photo.url}
+        // href={photo.url}
       >
         <Tile 
         // tileClick={props.tileClick} 
@@ -39,9 +39,10 @@ export const Album = (props:any) => {
         key={photo.id}
         title={photo.title}
         thumbnail = {photo.thumbnailUrl}
+        url = {photo.url}
         className={styles.photoTile}
         />
-      </Link>
+      </div>
     ))
   }
 
@@ -51,7 +52,7 @@ export const Album = (props:any) => {
     <main className={styles.main}>
       <Header/>
       {/* add loading animation */}
-      <motion.h1 
+      <motion.div 
 
       initial={{
         opacity: 0,
@@ -67,11 +68,23 @@ export const Album = (props:any) => {
         duration: 0.9,
       }}
       
-      className={styles.title}>{albumTitle.includes('album') ? '' : albumTitle }</motion.h1>
+      className={styles.title}>
+        <div className={styles.breadcrumbs}>
+          <Link  className={styles.back} href="/">
+            Photo <br/> Albums
+          </Link>
+          <span className={styles.albumTitle}>
+            {albumTitle.includes('album') ? '' : `${albumTitle}` }
+          </span>
+        </div>
+        
+      </motion.div>
+
+
       <div className={styles.wrapper}>
         {generatePhotoTiles()}
-
       </div>
+
     </main>
     </>     
     )
