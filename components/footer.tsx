@@ -1,5 +1,5 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 import styles from "../styles/Footer.module.scss"
-
 
 export const Footer = () => (
   <div className={styles.footer}>
