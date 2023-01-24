@@ -23,11 +23,13 @@ export const Tile:React.FunctionComponent<TileProps> = (props) => {
     <motion.div
       layout
       data-album-id={props.id}
-      // whileHover={{scale:1.05}}
-      // whileTap={{scale:0.9}}
+      whileHover={{scale:1.05}}
+      whileTap={{scale:0.9}}
       onClick={() => { 
-        console.log(props.id);
-        props.modalOpen ? props.close() : props.open(props.id) 
+        if(!!props.open){
+          props.modalOpen ? props.close() : props.open(props.id) 
+        }
+        
       }}
       className={props.isPhotoTile? styles.photoTile : styles.albumTile}
       animate={{

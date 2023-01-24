@@ -10,8 +10,8 @@ export const Header = () => (
     <Image
       className={styles.logo}
       src={'/Mobelux-logo.png'} 
-      width="40" 
-      height="40" 
+      width="96" 
+      height="89" 
       alt="mobelux logo"
     />  
 
