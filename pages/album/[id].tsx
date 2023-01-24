@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from "react";
+import Head from 'next/head'
+
 import useSWR from 'swr';
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -15,17 +17,17 @@ let numOfPhotos = 15;
 
 export const Album = () => {
   const regex = /\d/g
-  const currentPath = useRouter().asPath
-  const albumID = currentPath.match(regex)
+  const currentPath:any = useRouter().asPath
+  const albumID = parseInt(currentPath.match(regex))
   const { data, error, isLoading } = useSWR(`https://jsonplaceholder.typicode.com/albums/${albumID}/photos`, fetchFn)
   const photoSample = (data ? data.slice(0, numOfPhotos) : []);
   
-  const [albums, setAlbums] = useState(null);
+  const [albums, setAlbums] = useState<any>(null);
   const [modalOpen, setModalOpen] = useState(false)
   const [photoID, setPhotoID] = useState(0)
   const close = () => setModalOpen(false)
-  const open = (id:number) => {
-    setPhotoID(id)
+  const open = (id:string) => {
+    setPhotoID(parseInt(id))
     setModalOpen(true)
   }
 
@@ -70,6 +72,12 @@ export const Album = () => {
 
   return (
     <>
+      <Head>
+        <title>Photux | {!!albums && albums[albumID-1]?.title} </title>
+        <meta name="description" content="Photo App for Mobelux by Texhale" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <main className={styles.main}>
         <Header/>
         <motion.div 
@@ -99,8 +107,8 @@ export const Album = () => {
             <Modal 
               modalOpen={modalOpen} 
               handleClose={close} 
-              url={photoSample[photoID-1].url} 
-              title={photoSample[photoID-1].title}
+              url={photoSample[photoID - 1].url} 
+              title={photoSample[photoID - 1].title}
             /> }
         </AnimatePresence>
       </main>
