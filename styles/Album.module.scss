@@ -52,5 +52,6 @@ min-height: 100vh;
     align-items: center;
     .albumTitle {
         padding-inline-start: 0.75rem;
+        word-break: break-word;
     }
 }

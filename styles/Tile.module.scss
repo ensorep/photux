@@ -1,4 +1,4 @@
-.tile {
+.albumTile {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,7 +9,7 @@
   font-weight: bolder;
   font-family: sans-serif;
   text-transform: capitalize;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   align-self: start;
   overflow: hidden;
   max-height: 400px;
