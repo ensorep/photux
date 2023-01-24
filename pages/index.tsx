@@ -4,10 +4,8 @@ type Album = {
 };
 
 import Head from 'next/head'
-import Image from 'next/image'
-import { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import styles from '@/styles/Home.module.scss'
-import Profile from '@/components/profile'
 import Link from 'next/link'
 import useSWR from 'swr'
 import Tile from '@/components/tile'
@@ -17,7 +15,7 @@ import Footer from '@/components/footer'
 
 let numOfAlbums = 12;
 
-export let albumSample: [];
+let albumSample: [];
 
 export const fetchFn = async (args:any) => {
   try {
@@ -66,7 +64,7 @@ export default function Home() {
           href={`album/${item.id}`}
         >
           <Tile 
-          key={item.id} 
+          key={item.id * 820} 
           isPhotoTile = {false}
           title={item.title}
           id={item.id} 

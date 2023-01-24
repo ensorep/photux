@@ -1,4 +1,3 @@
-import React from 'react';
 import { useUser } from '@auth0/nextjs-auth0/client';
 // import Image from 'next/image'
 // import type { ImageLoaderProps } from 'next/image';

@@ -1,19 +1,21 @@
 import React, {useState, useEffect} from "react";
-import Head from 'next/head'
-
-import useSWR from 'swr';
 import { useRouter } from "next/router";
+import Head from 'next/head'
 import Link from "next/link";
+
+// 3rd party libraries 
+import useSWR from 'swr';
 import { motion, AnimatePresence } from 'framer-motion';
 
+//local resources
 import Header from "@/components/header";
 import Tile from "@/components/tile";
 import Modal from "@/components/modal";
 import { fetchFn } from "..";
-
 import styles from '@/styles/Album.module.scss'
 
 let numOfPhotos = 15;
+
 
 export const Album = () => {
   const regex = /\d/g
@@ -22,16 +24,20 @@ export const Album = () => {
   const { data, error, isLoading } = useSWR(`https://jsonplaceholder.typicode.com/albums/${albumID}/photos`, fetchFn)
   const photoSample = (data ? data.slice(0, numOfPhotos) : []);
   
+
   const [albums, setAlbums] = useState<any>(null);
   const [modalOpen, setModalOpen] = useState(false)
   const [photoID, setPhotoID] = useState(0)
+
+  const selectedTile = photoSample.find((photo:{id:number}) => photo.id === photoID)
   const close = () => setModalOpen(false)
+
   const open = (id:string) => {
     setPhotoID(parseInt(id))
     setModalOpen(true)
   }
 
-
+  //persist data on refresh
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const localStorageData = JSON.parse((window.localStorage.getItem('albums') || '{}'))
@@ -47,11 +53,14 @@ export const Album = () => {
   }
 
 
+   
+
+
   const generatePhotoTiles = () => {
-    return photoSample.map((photo: { id: number; title: string, thumbnailUrl: string, url: string}) => (
+    return photoSample.map((photo: { id: number; title: string, thumbnailUrl: string, url: string}, i:number) => (
       <div
         className={styles.photoTileLink}
-        key={photo.id}
+        key={i}
       >
         <Tile
           className={styles.photoTile}
@@ -59,7 +68,7 @@ export const Album = () => {
           setModalOpen = {setModalOpen}
           open = {open}
           close = {close}
-          key = {photo.id}
+          // key = {i}
           isPhotoTile = {true}
           title = {photo.title}
           url = {photo.url}
@@ -103,12 +112,11 @@ export const Album = () => {
           initial={false}
           mode = "wait"
         >
-          { !!modalOpen && 
+          { !!modalOpen &&
             <Modal 
-              modalOpen={modalOpen} 
               handleClose={close} 
-              url={photoSample[photoID - 1].url} 
-              title={photoSample[photoID - 1].title}
+              url={ selectedTile.url } 
+              title={ selectedTile.title }
             /> }
         </AnimatePresence>
       </main>

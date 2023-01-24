@@ -1,7 +1,6 @@
-import React, { use, useState } from "react";
+import React from "react";
 import styles from '../styles/Tile.module.scss'
 import { motion } from "framer-motion"
-import Modal from "./modal";
 
 interface TileProps {
   isPhotoTile: boolean,
@@ -24,7 +23,6 @@ export const Tile:React.FunctionComponent<TileProps> = (props) => {
       layout
       data-album-id={props.id}
       whileHover={{scale:1.05}}
-      whileTap={{scale:0.9}}
       onClick={() => { 
         if(!!props.open){
           props.modalOpen ? props.close() : props.open(props.id) 
